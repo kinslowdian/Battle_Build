@@ -1,0 +1,243 @@
+.map-enemy_40x40
+{
+	width: 40px;
+	height: 40px;
+				
+	position: absolute;
+				
+	z-index: 1;
+}
+
+.map-enemy
+{
+	width: inherit;
+	height: inherit;
+}
+
+
+.enemy-sprite
+{
+	width: inherit;
+	height: inherit;		
+}
+
+
+.enemy-sprite .map-enemy_40x40-head
+{
+	width: inherit;
+	height: inherit;
+				
+	position: absolute;
+	
+	/* background-position: 0px 0px; */
+				
+	z-index: 2;
+}
+			
+.enemy-sprite .map-enemy_40x40-hand-L
+{
+	width: inherit;
+	height: inherit;
+				
+	background-position: 0px -40px;
+				
+	position: absolute;
+				
+	z-index: 3;				
+}
+			
+.enemy-sprite .map-enemy_40x40-hand-R
+{
+	width: inherit;
+	height: inherit;
+				
+	background-position: -40px -40px;
+				
+	position: absolute;
+				
+	z-index: 3;				
+}
+			
+.enemy-sprite .map-enemy_40x40-body
+{
+	width: inherit;
+	height: inherit;
+				
+	background-position: -160px 0px;
+				
+	position: absolute;
+				
+	z-index: 1;				
+}
+			
+.enemy-sprite .map-enemy_40x40-legs
+{
+	width: inherit;
+	height: inherit;
+				
+	background-position: 0 -80px;
+				
+	position: absolute;
+				
+	z-index: 0;
+}
+
+.tween-map-enemy_40x40-head
+{
+	-webkit-animation	: tweenMapEnemy40x40HeadFrames 0.4s ease-in-out infinite;
+	animation			: tweenMapEnemy40x40HeadFrames 0.4s ease-in-out infinite;
+}
+			
+@-webkit-keyframes tweenMapEnemy40x40HeadFrames
+{
+	0%		{-webkit-transform: translateY(0px);}
+	50%		{-webkit-transform: translateY(-2px);}
+	100%	{-webkit-transform: translateY(0px);}
+}
+			
+@keyframes tweenMapEnemy40x40HeadFrames
+{
+	0%		{transform: translateY(0px);}
+	50%		{transform: translateY(-2px);}
+	100%	{transform: translateY(0px);}
+}
+			
+.tween-map-enemy_40x40-hand-L
+{
+	-webkit-animation	: tweenMapEnemy40x40HandL_Frames 0.6s linear infinite;
+	animation			: tweenMapEnemy40x40HandL_Frames 0.6s linear infinite;
+}
+			
+@-webkit-keyframes tweenMapEnemy40x40HandL_Frames
+{
+	0%		{-webkit-transform: translateY(0px);}
+	50%		{-webkit-transform: translateY(-2px);}
+	100%	{-webkit-transform: translateY(0px);}
+}
+			
+@keyframes tweenMapEnemy40x40HandL_Frames
+{
+	0%		{transform: translateY(0px);}
+	50%		{transform: translateY(-2px);}
+	100%	{transform: translateY(0px);}
+}
+			
+.tween-map-enemy_40x40-hand-R
+{
+	-webkit-animation	: tweenMapEnemy40x40HandR_Frames 0.6s linear infinite;
+	animation			: tweenMapEnemy40x40HandR_Frames 0.6s linear infinite;
+}
+			
+@-webkit-keyframes tweenMapEnemy40x40HandR_Frames
+{
+	0%		{-webkit-transform: translateY(-2px);}
+	50%		{-webkit-transform: translateY(0px);}
+	100%	{-webkit-transform: translateY(-2px);}
+}
+			
+@keyframes tweenMapEnemy40x40HandR_Frames
+{
+	0%		{transform: translateX(-2px);}
+	50%		{transform: translateX(0px);}
+	100%	{transform: translateX(-2px);}
+}
+
+.tween-map-enemy_40x40_loop
+{
+	-webkit-animation	: tweenMapEnemy40x40WalkLoopFrames 0.12s steps(8) 0 infinite;
+	animation			: tweenMapEnemy40x40WalkLoopFrames 0.12s steps(8) 0 infinite;
+}
+			
+.tween-map-enemy_40x40_stop
+{
+	background-position: 0 -80px;
+}
+			
+@-webkit-keyframes tweenMapEnemy40x40WalkLoopFrames
+{
+	from	{background-position: 0 -80px;}
+	to		{background-position: -320px -80px;}
+}
+			
+@keyframes tweenMapEnemy40x40WalkLoopFrames
+{
+	from	{background-position: 0 -80px;}
+	to		{background-position: -320px -80px;}
+}
+
+
+/* DISPLAY PIXELS */
+
+.enemy_rabbit .map-enemy_40x40-head
+{
+	background-position-y: 0;
+}
+
+.enemy_rabbit .map-enemy_40x40-hand-L
+{
+	background-position-y: -40px;
+}
+
+.enemy_rabbit .map-enemy_40x40-hand-R
+{
+	background-position-y: -40px;
+}
+
+.enemy_rabbit .map-enemy_40x40-body
+{
+	background-position-y: 0;
+}
+
+.enemy_rabbit .map-enemy_40x40-legs
+{
+	background-position-y: -80px;
+}
+
+
+
+
+.enemy_bird .enemy-sprite .map-enemy_40x40-head
+{
+	background-position-y: -120px;
+}
+
+.enemy_bird .enemy-sprite .map-enemy_40x40-hand-L
+{
+	background-position-y: -160px;
+}
+
+.enemy_bird .enemy-sprite .map-enemy_40x40-hand-R
+{
+	background-position-y: -160px;
+}
+
+.enemy_bird .enemy-sprite .map-enemy_40x40-body
+{
+	background-position-y: -120px;
+}
+
+.enemy_bird .enemy-sprite .map-enemy_40x40-legs
+{
+	background-position-y: -200px;
+}
+
+			.map-enemy_40x40_head_default
+			{
+				background-position-x: 0;
+			}
+			
+			.map-enemy_40x40_head_happy
+			{
+				background-position-x: -40px;
+			}
+			
+			.map-enemy_40x40_head_dead
+			{
+				background-position-x: -80px;
+			}
+			
+			.map-enemy_40x40_head_fear
+			{
+				background-position-x: -120px;
+			}	
+
