@@ -1,0 +1,918 @@
+/* ------------------------------------------------------------------- NAV */
+/* ------------------------------------------------------------------- NAV */
+
+#info-cloud
+	{
+		width: 320px;
+		height: 20px;
+		
+		position: absolute;
+		
+		top: 0; bottom: 0; left: 0; right: 0;
+		
+		margin: 10px auto 0 auto;
+		
+		-webkit-transition	: opacity 0.2s ease;
+		transition 			: opacity 0.2s ease;
+	}
+	
+	#info-cloud p
+	{
+		font-size: 26px;
+		letter-spacing: 0.1em;
+		text-align: center;
+		color: #ff0272;
+	}
+	
+	#battle-cloud
+	{
+		width: 100%;
+		height: 211px;
+					
+		position: fixed;
+					
+		-webkit-transform	: translateY(-211px);
+		transform			: translateY(-211px);
+					
+		/* z-index: 2; */ /* in html */
+		z-index: 0;
+	}
+	
+	.tween-battle-cloud
+	{
+		-webkit-transition	: -webkit-transform 1s ease-in-out;
+		transition			: -webkit-transform 1s ease-in-out;
+	}
+	
+	.battle-cloud-hide
+	{
+		-webkit-transform	: translateY(-211px);
+		transform			: translateY(-211px);		
+	}
+	
+	.battle-cloud-show
+	{
+		-webkit-transform	: translateY(0px);
+		transform			: translateY(0px);		
+	}
+	
+	
+	/* ---------------------------------- BIN */
+	
+	.tween-battle-cloud-show
+	{
+		-webkit-animation	: tweenBattleCloudShowFrames 1s ease-in-out forwards;
+		animation			: tweenBattleCloudShowFrames 1s ease-in-out forwards;		
+	}
+	
+	@-webkit-keyframes tweenBattleCloudShowFrames
+	{
+		from 	{ -webkit-transform: translateY(-211px); }
+		to		{ -webkit-transform: translateY(0px); }
+	}
+	
+	@keyframes tweenBattleCloudFrames
+	{
+		from 	{ transform: translateY(-211px); }
+		to		{ transform: translateY(0px); }
+	}
+	
+	.tween-battle-cloud-hide
+	{
+		-webkit-animation	: tweenBattleCloudHideFrames 1s ease-in-out forwards;
+		animation			: tweenBattleCloudHideFrames 1s ease-in-out forwards;		
+	}
+	
+	@-webkit-keyframes tweenBattleCloudHideFrames
+	{
+		from 	{ -webkit-transform: translateY(0px); }
+		to		{ -webkit-transform: translateY(-211px); }
+	}
+	
+	@keyframes tweenBattleCloudHideFrames
+	{
+		from 	{ transform: translateY(0px); }
+		to		{ transform: translateY(-211px); }
+	}
+	
+	/* ---------------------------------- BIN */			
+				
+	#battle-nav
+	{
+		width: 270px;
+		height: 90px;
+		
+		position: absolute;
+		
+		top: 0; bottom: 0; left: 0; right: 0;
+					
+		margin: 0 auto;
+		
+		z-index: 2;
+		
+		-webkit-transition	: -webkit-transform 0.4s ease-in-out;
+		transition			: transform 0.4s ease-in-out;	
+	}
+	
+	.tween-battle-nav-transition
+	{
+	
+	}
+	
+	.battle-nav-show
+	{
+		-webkit-transform	: translateY(45px);
+		transform			: translateY(45px);		
+	}
+	
+	.battle-nav-hide
+	{
+		-webkit-transform	: translateY(-211px);
+		transform			: translateY(-211px);
+	}
+				
+	#battle-stone
+	{
+	
+	}
+	
+	#battle-paper
+	{
+	
+	}
+	
+	#battle-scissors
+	{
+	
+	}
+				
+	.battleNavButton
+	{
+		width: 90px;
+		height: 90px;
+					
+		float: left;
+					
+		background-position: 0 0;		
+	}
+				
+	.battleNavButton div
+	{
+		width: inherit;
+		height: inherit;
+					
+		position: absolute;
+					
+		-webkit-transform-origin	: 50% 50%;
+		transform-origin			: 50% 50%;
+					
+		z-index: 0;
+	}
+				
+	.battleNavShock
+	{
+		background-position: -90px 0px;
+					
+		opacity: 0;
+					
+		-webkit-transition	: opacity 0.4s linear;
+		transition			: opacity 0.4s linear;
+					
+		z-index: 1;
+	}
+				
+	.battleNavSprite-stone
+	{
+		background-position: 0px -90px;
+	}
+				
+	.battleNavSprite-paper
+	{
+		background-position: -90px -90px;
+	}
+				
+	.battleNavSprite-scissors
+	{
+		background-position: 0px -180px;
+					
+		clear: left;
+	}
+	
+	.battleNavSprite-mouseEvents
+	{
+		-webkit-transition	: opacity 0.2s linear;
+		transition			: opacity 0.2s linear;		
+	}
+				
+	.tween-battle-selected
+	{
+		-webkit-animation	: tweenBattleSelectedFrames 0.4s ease-in-out infinite;
+		animation			: tweenBattleSelectedFrames 0.4s ease-in-out infinite;
+	}
+				
+	@-webkit-keyframes tweenBattleSelectedFrames
+	{
+		0%		{ -webkit-transform: scale(1); }
+		50%		{ -webkit-transform: scale(1.2); }
+		100%	{ -webkit-transform: scale(1); }
+	}
+	
+	@keyframes tweenBattleSelectedFrames
+	{
+		0%		{ transform: scale(1); }
+		50%		{ transform: scale(1.2); }
+		100%	{ transform: scale(1); }
+	}
+	
+	#battle-nav-fight
+	{
+		width: 296px;
+		height: 90px;
+		
+		position: absolute;
+		
+		top: 0; bottom: 0; left: 0; right: 0;
+		
+		margin: 50px auto 0 auto;
+		
+		/* visibility: hidden; */
+		
+		-webkit-transform	: translateY(-211px);
+		transform			: translateY(-211px);
+		
+		z-index: 1;
+	}
+	
+	.tween-battle-nav-fight
+	{
+		-webkit-transition	: -webkit-transform 0.4s ease-in-out;
+		transition			: transform 0.4s ease-in-out;			
+	}
+	
+	
+	/* HEADS */
+			
+ 	.battleCute-warrior-head-goat
+ 	{
+	 	background-position: 0px -209px;
+ 	}
+			
+	.battleCute-warrior-head-boss
+ 	{
+	 	background-position: -36px -209px;
+ 	}
+ 	
+ 	/* TEMP */
+ 	
+ 	.battleCute-warrior-head-griz
+ 	{
+	 	background-position: -72px -209px;
+ 	}
+ 	
+  	.battleCute-warrior-head-bird
+ 	{
+	 	background-position: -108px -209px;
+ 	}
+	
+	/* TEMP */		
+			
+	/* GENERAL */
+			
+ 	.battleCute-eyes
+ 	{
+	 	width: 16px;
+	 	height: 6px;
+	 		 	
+	 	position: absolute;
+	 		 	
+	 	-webkit-transform	: translate(10px, 18px);
+	 	transform			: translate(10px, 18px);
+ 	}
+ 		 	
+ 	.battleCute-eyes-sprite
+ 	{
+	 	width: 14px;
+	 	height: 2px;
+ 	}
+ 		 	
+ 	.battleCute-eyes-norm
+ 	{
+	 	background-position: -14px -70px;
+ 	}
+ 		 	
+ 	.battleCute-eyes-happy
+ 	{
+	 	background-position: 0px -70px;
+ 	}
+ 		 	
+ 	.battleCute-speak-right .battleCute-eyes-norm, .battleCute-speak-left .battleCute-eyes-norm
+ 	{
+	 	background-position: -42px -70px;
+ 	}
+ 		 	
+ 	.battleCute-speak-right .battleCute-eyes-happy, .battleCute-speak-left .battleCute-eyes-happy
+ 	{
+	 	background-position: -28px -70px;
+ 	}
+ 		 	
+ 	.battleCute-eyes .battleCute-eyes-sprite
+ 	{
+	 	-webkit-transition	: -webkit-transform 0.2s ease;
+	 	transition			: transform 0.2s ease;
+ 	}
+ 		 	
+ 	.battleCute-eyes-look-C
+ 	{
+	 	-webkit-transform	: translate(1px, 2px);
+	 	transform			: translate(1px, 2px);	
+ 	}
+ 		 	
+ 	.battleCute-eyes-look-L
+ 	{
+	 	-webkit-transform	: translate(-1px, 2px);
+	 	transform			: translate(-1px, 2px);		 		 	
+ 	}
+ 		 	
+ 	.battleCute-eyes-look-R
+ 	{
+	 	-webkit-transform	: translate(3px, 2px);
+	 	transform			: translate(3px, 2px);	 		 	
+ 	}
+ 		 	
+ 	.battleCute-cloud
+ 	{
+ 		 width: 14px;
+ 		 height: 8px;
+ 		 		
+ 		background-position: -90px -73px;
+ 		 		
+	 	position: absolute;
+	 		 	
+	 	opacity: 0;
+	 		 	
+	 	-webkit-transition	: opacity 0.3s linear;
+	 	transition			: opacity 0.3s linear;
+	 		 	
+	 	-webkit-transform	: translate(11px, -11px);
+	 	transform			: translate(11px, -11px);
+ 	}
+ 		 	
+ 	.tween-battleCute-Cloud
+ 	{
+ 		-webkit-animation	: tweenBattleCuteCloudFrames 0.4s ease-in-out infinite;
+ 		animation			: tweenBattleCuteCloudFrames 0.4s ease-in-out infinite;
+ 	}
+
+ 	@-webkit-keyframes tweenBattleCuteCloudFrames
+ 	{
+	 	0%		{ -webkit-transform	: translate(11px, -11px); }
+	 	50%		{ -webkit-transform	: translate(11px, -19px); }
+	 	100%	{ -webkit-transform	: translate(11px, -11px); }
+ 	}
+ 		 	
+ 	@keyframes tweenBattleCuteCloudFrames
+ 	{
+	 	0%		{ transform	: translate(11px, -11px); }
+	 	50%		{ transform	: translate(11px, -19px); }
+	 	100%	{ transform	: translate(11px, -11px); }
+ 	}
+ 		 	
+ 		 	
+ 	.battleCute-stone
+ 	{
+	 	background-position: 0px -73px;
+ 	}
+ 		 	
+ 	.battleCute-paper
+ 	{
+	 	background-position: -30px -73px;
+ 	}
+ 		 	
+ 	.battleCute-scissors
+ 	{
+	 	background-position: -60px -73px;
+ 	}
+			
+	/* WARRIOR */
+			
+ 	.battleCute-tears
+ 	{
+	 	width: 2px;
+	 	height: 10px;
+	 		 	
+	 	background-position: -104px -73px;
+	 		 	
+	 	opacity: 0;
+	 		 	
+	 	-webkit-transition	: opacity 0.3s linear;
+	 	transition			: opacity 0.3s linear;
+	 		 	
+	 	position: absolute;
+ 	}
+ 		 	
+ 	.battleCute-warrior-head
+ 	{
+	 	width: 36px;
+	 	height: 45px;
+	 		 	
+	 	position: absolute;
+	 		 	
+	 	-webkit-transform	: translate(2px, 0px);
+	 	transform			: translate(2px, 0px);
+	 		 	
+	 	z-index: 0;
+ 	}
+ 		 	
+ 	.tween-battleCute-warrior-head
+ 	{
+	 	-webkit-animation	: tweenBattleCuteWarriorHead 0.4s ease-in-out infinite;
+	 	animation			: tweenBattleCuteWarriorHead 0.4s ease-in-out infinite;
+ 	}
+ 		 	
+ 	@-webkit-keyframes tweenBattleCuteWarriorHead
+ 	{
+	 	0%		{ -webkit-transform	: translate(2px, 0px); }
+	 	50%		{ -webkit-transform	: translate(2px, 4px); }
+	 	100%	{ -webkit-transform	: translate(2px, 0px); }
+ 	}
+ 		 	
+  	@keyframes tweenBattleCuteWarriorHead
+ 	{
+	 	0%		{ transform	: translate(2px, 0px); }
+	 	50%		{ transform	: translate(2px, 4px); }
+	 	100%	{ transform	: translate(2px, 0px); }
+ 	}
+ 		 	
+ 	.battleCute-warrior-body
+ 	{
+	 	width: 40px;
+	 	height: 33px;
+	 		 	
+	 	position: absolute;
+	 		 	
+	 	-webkit-transform	: translate(0px, 39px);
+	 	transform			: translate(0px, 39px);
+	 		 	
+	 	z-index: 1;
+ 	}
+ 		 	
+ 	.battleCute-warrior-arms
+ 	{
+	 	width: 40px;
+	 	height: 23px;
+	 		 	
+	 	position: absolute;
+	 		 	
+	 	z-index: 1;
+ 	} 
+ 		 	
+ 	.battleCute-warrior-arm
+ 	{
+	 	width: 8px;
+	 	height: 23px;
+	 		 	
+	 	position: absolute;
+	 		 		
+ 	}
+ 		 	
+ 	.battleCute-warrior-arm-left
+ 	{
+ 		 background-position: -102px -104px;	
+ 	}
+ 		 	
+ 	.battleCute-warrior-arm-right
+ 	{
+	 	-webkit-transform	: translate(32px, 0px);
+	 	transform			: translate(32px, 0px);
+ 	}
+ 		 	
+ 	.battleCute-warrior-arm-sprite
+ 	{
+	 	width: inherit;
+	 	height: inherit;
+	 			
+	 	-webkit-transform-origin	: 0px 4px;
+	 	transform-origin			: 0px 4px;
+	 			
+	 	-webkit-transition	: -webkit-transform 0.1s ease-in-out; 
+	 	transition			: transform 0.1s ease-in-out; 	
+ 	}
+ 		 	
+ 	.battleCute-warrior-armsUp
+ 	{
+	 	-webkit-transform	: scaleY(-1);
+	 	transform			: scaleY(-1);
+ 	}
+ 		 	
+  	.battleCute-warrior-armsDown
+ 	{
+	 	-webkit-transform	: scaleY(1);
+	 	transform			: scaleY(1);	
+ 	}
+ 		 	
+ 	.battleCute-warrior-arm-left .battleCute-warrior-arm-sprite
+ 	{
+	 	background-position: -102px -104px;	
+ 	}
+ 		 	
+ 	.battleCute-warrior-arm-right .battleCute-warrior-arm-sprite
+ 	{
+	 	background-position: -110px -104px;		
+ 	}
+ 		 	
+ 	.battleCute-speak-icon
+ 	{
+	 	width: 30px;
+	 	height: 30px;
+	 		 	
+	 	position: absolute;
+ 	}
+ 		 	
+ 	.battleCute-warrior-battleMode
+ 	{
+	 	width: 142px;
+	 	height: 72px;
+	 		 	
+	 	position: absolute;	 		 	
+ 	}
+ 		 	
+ 	.battleCute-warrior-bodyMain-left, .battleCute-warrior-bodyMain-right
+ 	{
+	 	width: 24px;
+	 	height: 33px;
+	 		 	
+	 	position: absolute;
+	 		 	
+	 	-webkit-transform	: translate(8px, 0px);
+	 	transform			: translate(8px, 0px);
+	 		 	
+	 	z-index: 0;
+ 	}
+ 		 	
+ 	.battleCute-bird-battleMode
+ 	{
+	 	width: 126px;
+	 	height: 71px;
+	 		 	
+	 	position: absolute;	 		 	
+ 	}
+			
+			
+	/* WARRIOR LEFT */
+			
+	#battle-nav-player1
+	{
+		position: absolute;
+				
+		bottom: 0; left: 0;
+				
+		margin: 0;
+	}
+			
+ 		 	
+ 	.battleCute-warrior-left
+ 	{
+	 	width: 40px;
+	 	height: 72px;
+ 	}
+ 		 	
+ 	.battleCute-warrior-left .battleCute-tears
+ 	{
+	 	-webkit-transform	: translate(12px, 26px);
+	 	transform			: translate(12px, 26px);
+ 	}
+ 		 	
+ 	.battleCute-warrior-bodyMain-left
+ 	{
+	 	background-position: -54px -104px;
+ 	}
+ 		 	
+ 	.battleCute-speak-left
+ 	{
+	 	width: 91px;
+	 	height: 70px;
+	 		 	
+	 	background-position: 0 0;
+	 		 	
+	 	opacity: 0;
+	 		 	
+	 	position: absolute;
+	 		 	
+	 	-webkit-transform	: translate(49px, -4px);
+	 	transform			: translate(49px, -4px);
+ 	}
+ 		 	
+ 	.battleCute-speak-left, .battleCute-speak-right
+ 	{
+	 	-webkit-transition  : opacity 0.3s linear;
+	 	transition  		: opacity 0.3s linear; 	 		 	
+ 	}
+ 		 	
+ 	.battleCute-speak-left .battleCute-eyes
+ 	{
+	 	-webkit-transform	: translate(7px, 7px);
+	 	transform			: translate(7px, 7px);
+ 	}
+ 		 	
+ 	.battleCute-speak-left .battleCute-speak-icon
+ 	{
+	 	-webkit-transform	: translate(41px, 20px);
+	 	transform			: translate(41px, 20px);
+ 	}	 	
+ 		 	
+ 		 	
+	/* WARRIOR RIGHT */
+			
+	#battle-nav-player2
+	{
+		position: absolute;
+				
+		bottom: 0; right: -102px;
+				
+		margin: 0;
+	}
+			
+ 		 	
+ 	.battleCute-warrior-right
+ 	{
+	 	width: 40px;
+	 	height: 72px;
+ 	}
+ 		 	
+ 	#battleCuteWarriorRight .battleCute-warrior-right
+ 	{
+	 	-webkit-transform	: translateX(102px);
+	 	transform			: translateX(102px);
+ 	}
+ 		 	
+ 	.battleCute-warrior-right .battleCute-tears
+ 	{
+	 	-webkit-transform	: translate(22px, 26px);
+	 	transform			: translate(22px, 26px);
+ 	}
+ 		 	
+ 	.battleCute-warrior-bodyMain-right
+ 	{
+	 	background-position: -78px -104px;
+ 	}
+ 		 	
+ 	.battleCute-speak-right
+ 	{
+	 	width: 91px;
+	 	height: 70px;
+	 		 	
+	 	background-position: -91px 0px;
+	 		 	
+	 	opacity: 0;
+	 		 	
+	 	position: absolute;
+	 		 	
+	 	-webkit-transform	: translate(-104px, -4px);
+	 	transform			: translate(-104px, -4px);
+ 	}
+ 		 	
+ 	.battleCute-speak-right .battleCute-eyes
+ 	{
+	 	-webkit-transform	: translate(7px, 7px);
+	 	transform			: translate(7px, 7px);
+ 	}
+ 		 	
+ 	.battleCute-speak-right .battleCute-speak-icon
+ 	{
+	 	-webkit-transform	: translate(20px, 20px);
+	 	transform			: translate(20px, 20px);
+ 	}
+
+	/* BIRD */
+			
+	#battle-nav-playerBird
+ 	{
+	 	position: absolute;
+	 		 	
+	 	bottom: 0; left: 0; right: 0;
+	 		 	
+	 	margin: 0 auto;
+ 	}
+ 		 	
+ 		 		
+ 	.battleCute-bird
+ 	{
+	 	width: 126px;
+	 	height: 71px;
+	 		 	
+	 	position: absolute;
+ 	}
+ 		 			
+ 	.battleCute-bird-body
+ 	{
+	 	width: 126px;
+	 		 	
+	 	z-index: 1;
+ 	}
+ 		 				
+ 	.battleCute-bird-head
+ 	{
+	 	width: 24px;
+	 	height: 62px;
+	 		 	
+	 	background-position: -118px -73px;
+	 		 	
+	 	position: absolute;
+	 		 	
+	 	top: 0;
+	 	right: 0;
+	 	bottom: 0;
+	 	left: 0;
+	 		 	
+	 	margin: 9px auto 0 auto;
+ 	}
+ 		 	
+ 	.tween-battleCute-bird-body
+ 	{
+	 	-webkit-animation	: tweenBattleCuteBirdBodyFrames 0.4s ease-in-out infinite;
+	 	animation			: tweenBattleCuteBirdBodyFrames 0.4s ease-in-out infinite;
+ 	}
+ 		 	
+ 	@-webkit-keyframes tweenBattleCuteBirdBodyFrames
+ 	{
+	 	0%		{ -webkit-transform: translateY(0px); }
+	 	50%		{ -webkit-transform: translateY(-4px); }
+	 	100%	{ -webkit-transform: translateY(0px); }
+ 	}
+ 		 	
+ 	@keyframes tweenBattleCuteBirdBodyFrames
+ 	{
+	 	0%		{ transform: translateY(0px); }
+	 	50%		{ transform: translateY(-4px); }
+	 	100%	{ transform: translateY(0px); }
+ 	}
+ 		 	
+ 	.battleCute-bird-head .battleCute-eyes
+ 	{
+	 	-webkit-transform	: translate(4px, 7px);
+	 	transform			: translate(4px, 7px);
+ 	}
+ 		 				
+ 	.battleCute-bird-arm 
+ 	{
+	 	width: 53px;
+	 	height: 36px;
+	 		 	
+	 	position: absolute;
+ 	}
+ 		 	
+ 	.battleCute-bird-arm-main
+ 	{
+	 	width: inherit;
+	 	height: inherit;
+	 		 	
+	 	background-position: 0px -173px;
+	 		 	
+	 	-webkit-transform-origin	: 52px 21px;
+	 	transform-origin			: 52px 21px;
+ 	}
+ 		 	
+ 	.battleCute-bird-arm-inner
+ 	{
+	 	width: inherit;
+	 	height: inherit;
+	 		 	
+	 	background-position: 0px -173px;	 		 	
+ 	}
+ 		 	
+ 	.tween-battleCute-bird-arm-main-intoFly
+ 	{
+	 	-webkit-animation	: tweenBattleCuteBirdArmMainIntoFlyFrames 0.2s ease-out forwards;
+	 	animation			: tweenBattleCuteBirdArmMainIntoFlyFrames 0.2s ease-out forwards;
+ 	}
+ 		 	
+ 	@-webkit-keyframes tweenBattleCuteBirdArmMainIntoFlyFrames
+ 	{
+	 	from	{ -webkit-transform: rotate( 0deg); }
+	 	to		{ -webkit-transform: rotate( 30deg); }
+ 	}
+ 		 	
+ 	@keyframes tweenBattleCuteBirdArmMainIntoFlyFrames
+ 	{
+	 	from	{ transform: rotate( 0deg); }
+	 	to		{ transform: rotate( 30deg); }
+ 	}
+ 		 	
+ 		 	
+ 	.tween-battleCute-bird-arm-main
+ 	{
+	 	-webkit-animation	: tweenBattleCuteBirdArmMainFrames 0.4s ease-in-out infinite;
+	 	animation			: tweenBattleCuteBirdArmMainFrames 0.4s ease-in-out infinite;
+ 	}
+ 		 	
+ 	@-webkit-keyframes tweenBattleCuteBirdArmMainFrames
+ 	{
+	 	0%			{ -webkit-transform: rotate( 30deg); }
+	 	50%			{ -webkit-transform: rotate(-30deg); }
+	 	100%		{ -webkit-transform: rotate(30deg); }
+ 	}
+ 		 	
+ 	@keyframes tweenBattleCuteBirdArmMainFrames
+ 	{
+	 	0%			{ transform: rotate( 30deg); }
+	 	50%			{ transform: rotate(-30deg); }
+	 	100%		{ transform: rotate(30deg); }
+ 	}
+ 		 	
+ 	.battleCute-bird-arm-left
+ 	{
+	 		 	
+ 	}
+ 		 	
+ 		 	
+ 	.battleCute-bird-arm-right
+ 	{
+	 	-webkit-transform	: scaleX(-1) translateX(-73px);
+	 	transform			: scaleX(-1) translateX(-73px);
+ 	}
+ 		 					
+ 	.battleCute-bird-board
+ 	{
+	 	width: 31px;
+	 	height: 36px;
+	 		 	
+	 	background-position: 0px -137px;
+ 	}
+ 		 	
+ 	.tween-battleCute-bird-countDown
+ 	{
+	 	-webkit-animation	: tweenBattleCuteBirdCountDownFrames 2s steps(3) forwards;
+	 	animation			: tweenBattleCuteBirdCountDownFrames 2s steps(3) forwards;
+ 	}
+ 		 	
+ 	@-webkit-keyframes tweenBattleCuteBirdCountDownFrames
+ 	{
+	 	from	{ background-position: 0px -137px; }
+	 	to		{ background-position: -93px -137px; }
+ 	}
+ 		 	
+ 	@keyframes tweenBattleCuteBirdCountDownFrames
+ 	{
+	 	from	{ background-position: 0px -137px; }
+	 	to		{ background-position: -93px -137px; }
+ 	}
+ 		 	
+ 	.tween-battleCute-bird-arm-main-fire
+ 	{
+	 	-webkit-animation	: tweenBattleCuteBirdArmMainFireFrames 0.2s steps(5) infinite;
+	 	animation			: tweenBattleCuteBirdArmMainFireFrames 0.2s steps(5) infinite;
+ 	}
+ 		 	
+ 	@-webkit-keyframes tweenBattleCuteBirdArmMainFireFrames
+ 	{
+	 	from	{ background-position: -53px -173px; }
+	 	to		{ background-position: -318px -173px; }
+ 	}
+ 		 	
+ 	@keyframes tweenBattleCuteBirdArmMainFireFrames
+ 	{
+	 	from	{ background-position: -53px -173px; }
+	 	to		{ background-position: -318px -173px; }
+ 	}
+ 		 				
+ 	.battleCute-bird-legs
+ 	{
+	 	width: 30px;
+	 	height: 48px;
+	 		 	
+	 	background-position: -142px -87px;
+	 		 	
+	 	position: absolute;
+	 		 	
+	 	top: 0;
+	 	right: 0;
+	 	bottom: 0;
+	 	left: 0;
+	 		 	
+	 	margin: 23px auto 0 auto;
+	 		 	
+	 	z-index: 0;
+	 		 	
+ 	}
+ 		 	
+ 	.tween-bird-flapAway
+ 	{
+	 	-webkit-animation	: tweenBirdFlapAwayFrames 2.5s linear forwards;
+	 	animation			: tweenBirdFlapAwayFrames 2.5s linear forwards;
+ 	}
+ 		 	
+ 	@-webkit-keyframes tweenBirdFlapAwayFrames
+ 	{
+	 	from	{ -webkit-transform: translateY(0px); }
+	 	to		{ -webkit-transform: translateY(-211px); }
+ 	}
+ 		 	
+ 	@keyframes tweenBirdFlapAwayFrames
+ 	{
+	 	from	{ transform: translateY(0px); }
+	 	to		{ transform: translateY(-211px); }
+ 	}
+
+
+/* ------------------------------------------------------------------- NAV */
+/* ------------------------------------------------------------------- NAV */

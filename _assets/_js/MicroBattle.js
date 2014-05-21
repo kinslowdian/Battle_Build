@@ -5,6 +5,8 @@
 	
 	var t;
 	
+	var spaceSquidReplayDelay;
+	
 	function init()
 	{
 		display_init();
@@ -62,7 +64,7 @@
 		$("#microBattle_wrapper .stage-view-y")[0].removeEventListener("webkitTransitionEnd", microBattleSequence_inView, false);
 		$("#microBattle_wrapper .stage-view-y")[0].removeEventListener("transitionend", microBattleSequence_inView, false);	
 		
-		microBattleSequence_squidsSetup();
+		spaceSquids_setup();
 		
 		mbs_level_delay = new AnimationTimer();
 		
@@ -85,6 +87,8 @@
 		
 		$(".tween-microBattleWeatherFade")[0].addEventListener("webkitTransitionEnd", microBattleSequence_startBattle, false);
 		$(".tween-microBattleWeatherFade")[0].addEventListener("transitionend", microBattleSequence_startBattle, false);
+		
+		spaceSquids_animationStart();
 	}
 	
 	function microBattleSequence_startBattle(event)
@@ -96,7 +100,65 @@
 		$("#player2 .map-enemy_40x40-head").removeClass("map-enemy_40x40_head_default").addClass("map-enemy_40x40_head_fear");
 	}
 	
-	function microBattleSequence_squidsSetup()
+	function spaceSquids_setup()
+	{
+		if(DISPLAY._width < 480)
+		{
+			$("#spaceSquid0").remove();
+			$("#spaceSquid1").remove();	
+		}
+		
+		else
+		{
+			spaceSquids_animationInit();
+			
+			spaceSquidReplayDelay = new AnimationTimer();
+			timerList_add(spaceSquidReplayDelay);			
+		}
+	}
+	
+	function spaceSquids_animationInit()
+	{
+		var css;
+		
+		css	=	{
+					"-webkit-transform" : "translateY(" + DISPLAY._height  + "px)",
+					"transform" : "translateY(" + DISPLAY._height  + "px)"
+				};
+		
+		$("#spaceSquid0").css(css);
+		$("#spaceSquid1").css(css);	
+	}
+	
+	function spaceSquids_animationStart()
+	{
+		var css;
+		var final_y = 240;
+		
+		$("#spaceSquid0").addClass("tween-spaceSquidMain");
+		$("#spaceSquid1").addClass("tween-spaceSquidMain");
+		
+		$(".tween-spaceSquidMain")[0].addEventListener("webkitTransitionEnd", spaceSquids_animationMid, false);
+		$(".tween-spaceSquidMain")[0].addEventListener("transitionend", spaceSquids_animationMid, false);
+		
+		css	=	{
+					"-webkit-transform" : "translateY(" + final_y  + "px)",
+					"transform" 		: "translateY(" + final_y  + "px)"
+				};
+		
+		$("#spaceSquid0").css(css);
+		$("#spaceSquid1").css(css);
+	}
+
+	function spaceSquids_animationMid(event)
+	{
+		$(".tween-spaceSquidMain")[0].removeEventListener("webkitTransitionEnd", spaceSquids_animationMid, false);
+		$(".tween-spaceSquidMain")[0].removeEventListener("transitionend", spaceSquids_animationMid, false);
+		
+		spaceSquidReplayDelay.time(1, spaceSquids_animationReturn);	
+	}
+	
+	function spaceSquids_animationReturn()
 	{
 		var css;
 		
@@ -107,5 +169,21 @@
 		
 		$("#spaceSquid0").css(css);
 		$("#spaceSquid1").css(css);
+		
+		$(".tween-spaceSquidMain")[0].addEventListener("webkitTransitionEnd", spaceSquids_animationEnd, false);
+		$(".tween-spaceSquidMain")[0].addEventListener("transitionend", spaceSquids_animationEnd, false);				
+	}
+	
+	function spaceSquids_animationEnd(event)
+	{
+		$(".tween-spaceSquidMain")[0].removeEventListener("webkitTransitionEnd", spaceSquids_animationEnd, false);
+		$(".tween-spaceSquidMain")[0].removeEventListener("transitionend", spaceSquids_animationEnd, false);
+		
+		$("#spaceSquid0").removeClass("tween-spaceSquidMain");
+		$("#spaceSquid1").removeClass("tween-spaceSquidMain");		
+		
+		spaceSquids_animationInit();
+		
+		spaceSquidReplayDelay.time(1, spaceSquids_animationStart);	
 	}
 	
