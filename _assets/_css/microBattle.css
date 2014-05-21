@@ -1,5 +1,9 @@
 	@charset "UTF-8";
 	
+	@import url(http://fonts.googleapis.com/css?family=Dosis);
+	
+	
+	
 	
 	*
 	{
@@ -14,6 +18,26 @@
 					
 		-webkit-backface-visibility	: hidden;
 	}
+	
+/* ------------------------------------------------------------------- FONT */
+/* ------------------------------------------------------------------- FONT */
+
+
+	.font-dosis
+	{
+		font-family: 'Dosis', sans-serif;
+		font-weight: lighter;
+	}
+	
+	.font-dosis, p
+	{
+		-webkit-font-smoothing	: antialiased;
+		font-smoothing			: antialiased;
+	}
+	
+	
+/* ------------------------------------------------------------------- FONT */
+/* ------------------------------------------------------------------- FONT */
 	
 	#microBattle_wrapper
 	{
@@ -183,8 +207,8 @@
 	
 	.tween-spaceSquidMain
 	{
-		-webkit-transition: -webkit-transform 8s ease-in-out;
-		transition: transform 8s ease-in-out;
+		-webkit-transition: -webkit-transform 4s ease-in-out;
+		transition: transform 4s ease-in-out;
 	}
 	
 	.spaceSquid
@@ -302,12 +326,12 @@
 	
 	.spaceSquid .spaceSquid_legs .spaceSquid_legs0
 	{
-		background-position: 0px -160px;		
+		background-position: 0px -160px;	
 	}
 	
 	.spaceSquid .spaceSquid_legs .spaceSquid_legs1
 	{
-		background-position: -80px -160px;		
+		background-position: -80px -160px;	
 	}
 	
 	.tween-SpaceSquid_legs0
@@ -348,6 +372,18 @@
 		0%		{transform: translateY(0px);}
 		50%		{transform: translateY(20px);}
 		100%	{transform: translateY(0px);}		
+	}
+	
+	.tween-SpaceSquid_legsStop
+	{
+		-webkit-animation-play-state: paused;
+		animation-play-state: paused;
+	}
+	
+	.tween-SpaceSquid_legsPlay
+	{
+		-webkit-animation-play-state: running;
+		animation-play-state: running;
 	}
 	
 	.spaceSquid .spaceSquid_body
@@ -1371,7 +1407,19 @@
 		100%	{ transform : translate(11px, 70px); }
 	}
 	
-	
+	#microBattle_nav_wrapper
+	{
+		width: 100%;
+		height: 100%;
+				
+		overflow: hidden;
+				
+		position: absolute;
+				
+		z-index: 4;			
+	}	
+
+
 	#microBattle_space_wrapper
 	{
 		width: 100%;

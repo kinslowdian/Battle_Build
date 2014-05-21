@@ -98,6 +98,29 @@
 	
 		$("#player1 .map-goat-head").removeClass("mapPlayer_head_default").addClass("mapPlayer_head_fear");
 		$("#player2 .map-enemy_40x40-head").removeClass("map-enemy_40x40_head_default").addClass("map-enemy_40x40_head_fear");
+		
+		battleNav_init();
+	}
+	
+	function battleNav_init()
+	{
+		var css;		
+	
+		$(".tween-battle-cloud")[0].addEventListener("webkitTransitionEnd", battleNav_inView, false);
+		$(".tween-battle-cloud")[0].addEventListener("transitionend", battleNav_inView, false);
+		
+		css = 	{
+					"-webkit-transform" : "translateY(" + 0 + "px)",
+					"transform" 		: "translateY(" + 0 + "px)"			
+				};
+				
+		$("#battle-cloud").css(css);
+	}
+	
+	function battleNav_inView(event)
+	{
+		$(".tween-battle-cloud")[0].removeEventListener("webkitTransitionEnd", battleNav_inView, false);
+		$(".tween-battle-cloud")[0].removeEventListener("transitionend", battleNav_inView, false);		
 	}
 	
 	function spaceSquids_setup()
@@ -142,8 +165,8 @@
 		$(".tween-spaceSquidMain")[0].addEventListener("transitionend", spaceSquids_animationMid, false);
 		
 		css	=	{
-					"-webkit-transform" : "translateY(" + final_y  + "px)",
-					"transform" 		: "translateY(" + final_y  + "px)"
+					"-webkit-transform" : "translateY(" + final_y + "px)",
+					"transform" 		: "translateY(" + final_y + "px)"
 				};
 		
 		$("#spaceSquid0").css(css);
@@ -155,7 +178,16 @@
 		$(".tween-spaceSquidMain")[0].removeEventListener("webkitTransitionEnd", spaceSquids_animationMid, false);
 		$(".tween-spaceSquidMain")[0].removeEventListener("transitionend", spaceSquids_animationMid, false);
 		
-		spaceSquidReplayDelay.time(1, spaceSquids_animationReturn);	
+		$("#spaceSquid0 .spaceSquid_legs0").addClass("tween-SpaceSquid_legsStop");
+		$("#spaceSquid0 .spaceSquid_legs1").addClass("tween-SpaceSquid_legsStop");
+		
+		$("#spaceSquid1 .spaceSquid_legs0").addClass("tween-SpaceSquid_legsStop");
+		$("#spaceSquid1 .spaceSquid_legs1").addClass("tween-SpaceSquid_legsStop");
+		
+		
+		// battleNav_init();
+		
+		spaceSquidReplayDelay.time(4, spaceSquids_animationReturn);	
 	}
 	
 	function spaceSquids_animationReturn()
@@ -163,9 +195,16 @@
 		var css;
 		
 		css	=	{
-					"-webkit-transform" : "translateY(" + DISPLAY._height  + "px)",
-					"transform" : "translateY(" + DISPLAY._height  + "px)"
+					"-webkit-transform" : "translateY(" + DISPLAY._height + "px)",
+					"transform" : "translateY(" + DISPLAY._height + "px)"
 				};
+		
+		$("#spaceSquid0 .spaceSquid_legs0").removeClass("tween-SpaceSquid_legsStop").addClass("tween-SpaceSquid_legsPlay");
+		$("#spaceSquid0 .spaceSquid_legs1").removeClass("tween-SpaceSquid_legsStop").addClass("tween-SpaceSquid_legsPlay");
+		
+		$("#spaceSquid1 .spaceSquid_legs0").removeClass("tween-SpaceSquid_legsStop").addClass("tween-SpaceSquid_legsPlay");
+		$("#spaceSquid1 .spaceSquid_legs1").removeClass("tween-SpaceSquid_legsStop").addClass("tween-SpaceSquid_legsPlay");
+		
 		
 		$("#spaceSquid0").css(css);
 		$("#spaceSquid1").css(css);
@@ -182,8 +221,8 @@
 		$("#spaceSquid0").removeClass("tween-spaceSquidMain");
 		$("#spaceSquid1").removeClass("tween-spaceSquidMain");		
 		
-		spaceSquids_animationInit();
+		// spaceSquids_animationInit();
 		
-		spaceSquidReplayDelay.time(1, spaceSquids_animationStart);	
+		// spaceSquidReplayDelay.time(1, spaceSquids_animationStart);	
 	}
 	
