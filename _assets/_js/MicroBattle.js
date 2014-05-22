@@ -5,7 +5,11 @@
 	
 	var t;
 	
-	var spaceSquidReplayDelay;
+	var spaceSquidsUse = false;
+	var spaceSquidsReplayDelay;
+	
+	var microBattleData_HTML_battleNav = "";
+	var microBattleData_HTML_fadeWrapper = "";
 	
 	function init()
 	{
@@ -16,6 +20,25 @@
 		timerList_init();
 		
 		microBattleSequence_init();
+	
+		microBattleSequence_storeData();
+	}
+	
+	function microBattleSequence_storeData()
+	{
+		microBattleData_HTML_battleNav = $("#battle-nav").html();
+		microBattleData_HTML_fadeWrapper = $("#microBattle_fade_wrapper").html();
+		
+		$("#battle-nav").html("");
+		$("#microBattle_fade_wrapper").html("");
+	}
+	
+	function microBattleSequence_addData()
+	{
+		$("#battle-nav").html(microBattleData_HTML_battleNav);
+		$("#microBattle_fade_wrapper").html(microBattleData_HTML_fadeWrapper);
+		
+		microBattleSequence_sceneReady();	
 	}
 	
 	function microBattleSequence_init()
@@ -59,10 +82,15 @@
 	
 	function microBattleSequence_inView(event)
 	{
-		var mbs_level_delay;
-		
 		$("#microBattle_wrapper .stage-view-y")[0].removeEventListener("webkitTransitionEnd", microBattleSequence_inView, false);
 		$("#microBattle_wrapper .stage-view-y")[0].removeEventListener("transitionend", microBattleSequence_inView, false);	
+		
+		microBattleSequence_addData();		
+	}
+	
+	function microBattleSequence_sceneReady()
+	{
+		var mbs_level_delay;
 		
 		spaceSquids_setup();
 		
@@ -88,7 +116,12 @@
 		$(".tween-microBattleWeatherFade")[0].addEventListener("webkitTransitionEnd", microBattleSequence_startBattle, false);
 		$(".tween-microBattleWeatherFade")[0].addEventListener("transitionend", microBattleSequence_startBattle, false);
 		
-		spaceSquids_animationStart();
+		if(spaceSquidsUse)
+		{
+			trace("catch1");
+			
+			spaceSquids_animationStart();	
+		}
 	}
 	
 	function microBattleSequence_startBattle(event)
@@ -125,18 +158,24 @@
 	
 	function spaceSquids_setup()
 	{
+		trace("catch0");
+		
 		if(DISPLAY._width < 480)
 		{
 			$("#spaceSquid0").remove();
 			$("#spaceSquid1").remove();	
+		
+			spaceSquidsUse = false;
 		}
 		
 		else
 		{
+			spaceSquidsUse = true;
+			
 			spaceSquids_animationInit();
 			
-			spaceSquidReplayDelay = new AnimationTimer();
-			timerList_add(spaceSquidReplayDelay);			
+			spaceSquidsReplayDelay = new AnimationTimer();
+			timerList_add(spaceSquidsReplayDelay);			
 		}
 	}
 	
@@ -187,7 +226,7 @@
 		
 		// battleNav_init();
 		
-		spaceSquidReplayDelay.time(4, spaceSquids_animationReturn);	
+		spaceSquidsReplayDelay.time(4, spaceSquids_animationReturn);	
 	}
 	
 	function spaceSquids_animationReturn()
@@ -223,6 +262,13 @@
 		
 		// spaceSquids_animationInit();
 		
-		// spaceSquidReplayDelay.time(1, spaceSquids_animationStart);	
+		// spaceSquidsReplayDelay.time(1, spaceSquids_animationStart);	
 	}
+	
+	
+	
+	
+	
+	
+	
 	

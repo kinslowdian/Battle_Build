@@ -19,6 +19,21 @@
 		background-size: 371px 400px;				
 	}
 	
+	.pixels_landDecay
+	{
+		background-image: url(../_img/landPixelDecay_1x.png);
+		background-repeat: no-repeat;
+		background-size: 1200px 800px;
+	}
+	
+	.pixels_woodlandBottom
+	{
+		background-image: url(../_img/bottomEnd_1x.png);
+		background-repeat: repeat-x;
+		background-position: center top;
+		background-size: 240px 160px;
+	}
+	
 	.pixels_warCrabs
 	{
 		background-image: url(../_img/tile_microBattle_bg_1x.png);
@@ -190,6 +205,16 @@
 			background-image: url(../_img/battleNavSprite_1x.png);			
 		}
 		
+		.pixels_landDecay
+		{
+			background-image: url(../_img/landPixelDecay_1x.png);
+		}
+		
+		.pixels_woodlandBottom
+		{
+			background-image: url(../_img/bottomEnd_1x.png);
+		}
+		
 		.pixels_warCrabs
 		{
 			background-image: url(../_img/tile_microBattle_bg_1x.png);
@@ -305,6 +330,16 @@
 		.pixels_battleFlow
 		{
 			background-image: url(../_img/battleNavSprite_2x.png);			
+		}
+		
+		.pixels_landDecay
+		{
+			background-image: url(../_img/landPixelDecay_2x.png);
+		}
+		
+		.pixels_woodlandBottom
+		{
+			background-image: url(../_img/bottomEnd_2x.png);
 		}
 		
 		.pixels_warCrabs
