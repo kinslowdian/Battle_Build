@@ -110,8 +110,16 @@
 		
 		z-index: 2;
 		
+/*
 		-webkit-transition	: -webkit-transform 0.4s ease-in-out;
 		transition			: transform 0.4s ease-in-out;	
+*/
+	}
+	
+	.tween-battle-nav
+	{
+		-webkit-transition	: -webkit-transform 0.4s ease-in-out;
+		transition			: transform 0.4s ease-in-out;			
 	}
 	
 	.tween-battle-nav-transition

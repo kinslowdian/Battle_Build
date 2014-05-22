@@ -6,10 +6,11 @@
 	var t;
 	
 	var spaceSquidsUse = false;
-	var spaceSquidsReplayDelay;
 	
 	var microBattleData_HTML_battleNav = "";
 	var microBattleData_HTML_fadeWrapper = "";
+	
+	var BATTLE_NAV;
 	
 	function init()
 	{
@@ -118,8 +119,6 @@
 		
 		if(spaceSquidsUse)
 		{
-			trace("catch1");
-			
 			spaceSquids_animationStart();	
 		}
 	}
@@ -137,28 +136,406 @@
 	
 	function battleNav_init()
 	{
-		var css;		
+		BATTLE_NAV = {};
+		
+		BATTLE_NAV.settings = {};
+		
+		BATTLE_NAV.settings.y_max = 211;
+		
+		BATTLE_NAV.settings.y_hide = 	{
+											"-webkit-transform" : "translateY(" + -BATTLE_NAV.settings.y_max + "px)",
+											"transform" 		: "translateY(" + -BATTLE_NAV.settings.y_max + "px)"
+										};
+								
+		BATTLE_NAV.settings.y_show = 	{
+											"-webkit-transform" : "translateY(0px)",
+											"transform" 		: "translateY(0px)"			
+										};
+		
+		BATTLE_NAV.settings.options_show = "battle-nav-show";
+		BATTLE_NAV.settings.options_hide = "battle-nav-hide";								
+		BATTLE_NAV.settings.options_tween = "tween-battle-nav";
+		
+				
+		BATTLE_NAV.options = {};
+		
+		BATTLE_NAV.options.stone = $("#battle-nav #battle-stone");
+		BATTLE_NAV.options.paper = $("#battle-nav #battle-paper");
+		BATTLE_NAV.options.scissors = $("#battle-nav #battle-scissors");
+		
+		
+		BATTLE_NAV.player_1 = {};
+		BATTLE_NAV.player_2 = {};
+		
+		BATTLE_NAV.player_1.head = $("#battle-nav-player1 .battleCute-warrior-head");
+		BATTLE_NAV.player_1.headType = "goat";
+		
+		BATTLE_NAV.player_2.head = $("#battle-nav-player2 .battleCute-warrior-head");
+		BATTLE_NAV.player_2.headType = "bird";
+		
+		
+		BATTLE_NAV.game = {};
+		
+		BATTLE_NAV.game.result = "LOSE";
+										
+		battleNav_show();
+	}
 	
+	function battleNav_show()
+	{
 		$(".tween-battle-cloud")[0].addEventListener("webkitTransitionEnd", battleNav_inView, false);
 		$(".tween-battle-cloud")[0].addEventListener("transitionend", battleNav_inView, false);
-		
-		css = 	{
-					"-webkit-transform" : "translateY(" + 0 + "px)",
-					"transform" 		: "translateY(" + 0 + "px)"			
-				};
 				
-		$("#battle-cloud").css(css);
+		$("#battle-cloud").css(BATTLE_NAV.settings.y_show);		
 	}
 	
 	function battleNav_inView(event)
 	{
 		$(".tween-battle-cloud")[0].removeEventListener("webkitTransitionEnd", battleNav_inView, false);
 		$(".tween-battle-cloud")[0].removeEventListener("transitionend", battleNav_inView, false);		
+	
+		battleNav_control(true);
 	}
+	
+	function battleNav_control(run)
+	{
+		// IF ELSE FOR TOUCH OR MOUSE NEEDED FOR EVENTS MOUSE ONLY
+		
+		for(var optionItem in BATTLE_NAV.options)
+		{
+			if(run)
+			{
+				$(BATTLE_NAV.options[optionItem]).css("cursor", "pointer");
+				
+				$(BATTLE_NAV.options[optionItem])[0].addEventListener("mouseover", battleNav_controlEvent, false);	
+				$(BATTLE_NAV.options[optionItem])[0].addEventListener("mouseout", battleNav_controlEvent, false);	
+				$(BATTLE_NAV.options[optionItem])[0].addEventListener("click", battleNav_controlEvent, false);	
+			}
+			
+			else
+			{
+				$(BATTLE_NAV.options[optionItem]).css("cursor", "default");
+				
+				$(BATTLE_NAV.options[optionItem])[0].removeEventListener("mouseover", battleNav_controlEvent, false);	
+				$(BATTLE_NAV.options[optionItem])[0].removeEventListener("mouseout", battleNav_controlEvent, false);	
+				$(BATTLE_NAV.options[optionItem])[0].removeEventListener("click", battleNav_controlEvent, false);				
+			}
+		}
+	}
+	
+	function battleNav_controlEvent(event)
+	{
+		switch(event.type)
+		{
+			case "mouseover":
+			{
+				$(event.target).css("opacity", "0.5");
+				
+				break;
+			}
+			
+			case "mouseout":
+			{
+				$(event.target).css("opacity", "1");
+				
+				break;
+			}
+			
+			case "click":
+			{
+				$(event.target).css("opacity", "1");
+				
+				battleNav_selection(event.target.parentNode.id); //parentElement ?
+				
+				break;
+			}
+		}
+	}
+	
+	function battleNav_selection(selected)
+	{
+		var selectionDelay;
+		
+		battleNav_control(false);
+		
+		$("#info-cloud").css("opacity", "0");
+		
+		if(selected === "battle-stone")
+		{
+			BATTLE_NAV.player_1.selection = "stone";
+		}
+		
+		if(selected === "battle-paper")
+		{
+			BATTLE_NAV.player_1.selection = "paper";
+		}
+		
+		if(selected === "battle-scissors")
+		{
+			BATTLE_NAV.player_1.selection = "scissors";
+		}
+		
+		$("#" + selected + " .battleNavShock").css("opacity", 1);
+		$("#" + selected + " div[class*='battleNavSprite-']").addClass("tween-battle-selected");
+		
+		// AFTER LOGIC DECIDED!!!
+		battleNav_logicDisplay();
+		// AFTER LOGIC DECIDED!!!
+		
+		selectionDelay = new AnimationTimer();
+		
+		timerList_add(selectionDelay);
+		selectionDelay.time(1, battleNav_removeSelection);
+	}
+	
+	function battleNav_logicDisplay()
+	{
+		switch(BATTLE_NAV.game.result)
+		{
+			case "WIN":
+			{
+				if(BATTLE_NAV.player_1.selection === "stone")
+				{
+					BATTLE_NAV.player_2.selection = "scissors";
+				}
+				
+				if(BATTLE_NAV.player_1.selection === "paper")
+				{
+					BATTLE_NAV.player_2.selection = "stone";
+				}
+				
+				if(BATTLE_NAV.player_1.selection === "scissors")
+				{
+					BATTLE_NAV.player_2.selection = "paper";
+				}
+								
+				break;
+			}
+			
+			case "DRAW":
+			{
+				BATTLE_NAV.player_2.selection = BATTLE_NAV.player_1.selection;
+				
+				break;
+			}
+			
+			case "LOSE":
+			{
+				if(BATTLE_NAV.player_1.selection === "stone")
+				{
+					BATTLE_NAV.player_2.selection = "paper";
+				}
+				
+				if(BATTLE_NAV.player_1.selection === "paper")
+				{
+					BATTLE_NAV.player_2.selection = "scissors";
+				}
+				
+				if(BATTLE_NAV.player_1.selection === "scissors")
+				{
+					BATTLE_NAV.player_2.selection = "stone";
+				}
+				
+				break;
+			}
+		}
+	}
+	
+	function battleNav_removeSelection()
+	{
+		$("." + BATTLE_NAV.settings.options_tween)[0].addEventListener("webkitTransitionEnd", battleNav_removeSelectionEnd, false);
+		$("." + BATTLE_NAV.settings.options_tween)[0].addEventListener("transitionend", battleNav_removeSelectionEnd, false);
+		
+		$("#battle-nav").removeClass(BATTLE_NAV.settings.options_show).addClass(BATTLE_NAV.settings.options_hide);		
+	}
+	
+	function battleNav_removeSelectionEnd(event)
+	{
+		$("." + BATTLE_NAV.settings.options_tween)[0].removeEventListener("webkitTransitionEnd", battleNav_removeSelectionEnd, false);
+		$("." + BATTLE_NAV.settings.options_tween)[0].removeEventListener("transitionend", battleNav_removeSelectionEnd, false);
+		
+		if(spaceSquidsUse)
+		{
+			spaceSquids_animationReturn();	
+		}
+		
+		battleNav_populate();		
+	}
+	
+	function battleNav_populate()
+	{
+		$("#battle-nav").html("");
+		
+		$(BATTLE_NAV.player_1.head).addClass("battleCute-warrior-head-" + BATTLE_NAV.player_1.headType);
+		$("#battle-nav-player1 .battleCute-eyes-sprite").addClass("battleCute-eyes-look-R");
+		$("#battle-nav-player1 .battleCute-speak-icon").addClass("battleCute-" + BATTLE_NAV.player_1.selection);
+		
+		$(BATTLE_NAV.player_2.head).addClass("battleCute-warrior-head-" + BATTLE_NAV.player_2.headType);
+		$("#battle-nav-player2 .battleCute-eyes-sprite").addClass("battleCute-eyes-look-L");
+		$("#battle-nav-player2 .battleCute-speak-icon").addClass("battleCute-" + BATTLE_NAV.player_2.selection);
+		
+		$("#battle-nav-fight").addClass("tween-battle-nav-fight");
+		
+		battleNav_showBattle();
+	}
+	
+	function battleNav_showBattle()
+	{
+		$("#battle-nav-fight").css(BATTLE_NAV.settings.y_show);
+		
+		$(".tween-battle-nav-fight")[0].addEventListener("webkitTransitionEnd", battleNav_showBattleInPlace, false);
+		$(".tween-battle-nav-fight")[0].addEventListener("transitionend", battleNav_showBattleInPlace, false);		
+	}
+	
+	function battleNav_showBattleInPlace(event)
+	{
+		var intoCountDownDelay;
+		
+		$(".tween-battle-nav-fight")[0].removeEventListener("webkitTransitionEnd", battleNav_showBattleInPlace, false);
+		$(".tween-battle-nav-fight")[0].removeEventListener("transitionend", battleNav_showBattleInPlace, false);
+		
+		intoCountDownDelay = new AnimationTimer();
+		timerList_add(intoCountDownDelay);
+		intoCountDownDelay.time(1, battleNav_startBattleCountDown);
+	}
+	
+	function battleNav_startBattleCountDown()
+	{
+		$("#battle-nav-player1 .battleCute-warrior-head .battleCute-eyes-sprite").removeClass("battleCute-eyes-look-R").addClass("battleCute-eyes-look-C");
+		
+		$("#battle-nav-player2 .battleCute-warrior-head .battleCute-eyes-sprite").removeClass("battleCute-eyes-look-L").addClass("battleCute-eyes-look-C");
+		
+		
+		
+		
+		$("#battle-nav-playerBird .battleCute-bird-board").addClass("tween-battleCute-bird-countDown");
+		
+	 	$("#battle-nav-playerBird .battleCute-bird-arm-left .battleCute-bird-board")[0].addEventListener("webkitAnimationEnd", battleNav_startBattleCountDownSequence, false);
+	 	$("#battle-nav-playerBird .battleCute-bird-arm-left .battleCute-bird-board")[0].addEventListener("animationend", battleNav_startBattleCountDownSequence, false);		
+	}
+	
+	function battleNav_startBattleCountDownSequence(event)
+	{
+	 	$("#battle-nav-playerBird .battleCute-bird-arm-left .battleCute-bird-board")[0].removeEventListener("webkitAnimationEnd", battleNav_startBattleCountDownSequence, false);
+	 	$("#battle-nav-playerBird .battleCute-bird-arm-left .battleCute-bird-board")[0].removeEventListener("animationend", battleNav_startBattleCountDownSequence, false);
+	 	
+	 	$("#battle-nav-playerBird .battleCute-bird-arm-inner").addClass("tween-battleCute-bird-arm-main-fire");
+	 			
+	 	$("#battle-nav-playerBird .battleCute-eyes-sprite").removeClass("battleCute-eyes-norm").addClass("battleCute-eyes-happy");
+	 	
+	 	$("#battle-nav-playerBird .battleCute-bird-arm-main").addClass("tween-battleCute-bird-arm-main-intoFly");
+	 			
+	 	$("#battle-nav-playerBird .battleCute-bird-arm-main")[0].addEventListener("webkitAnimationEnd", battleNav_clearStageForFightInit, false);
+	 	$("#battle-nav-playerBird .battleCute-bird-arm-main")[0].addEventListener("animationend", battleNav_clearStageForFightInit, false);
+	 	
+	 	$("#info-cloud").css("opacity", "1");		
+	}
+	
+	function battleNav_clearStageForFightInit(event)
+	{
+	 	var clearStage;
+	 	
+	 	$("#battle-nav-playerBird .battleCute-bird-arm-main")[0].removeEventListener("webkitAnimationEnd", battleNav_clearStageForFightInit, false);
+	 	$("#battle-nav-playerBird .battleCute-bird-arm-main")[0].removeEventListener("animationend", battleNav_clearStageForFightInit, false);
+	 	
+	 	clearStage = new AnimationTimer();
+	 	timerList_add(clearStage);
+	 	clearStage.time(1, battleNav_clearStageForFight);	
+	}
+	
+	function battleNav_clearStageForFight()
+	{
+		$("#info-cloud").css("opacity", "0");
+		
+		$("#battle-nav-playerBird .battleCute-bird-arm-main").removeClass("tween-battleCute-bird-arm-main-intoFly").addClass("tween-battleCute-bird-arm-main");
+	 			
+	 	$("#battle-nav-playerBird").addClass("tween-bird-flapAway");	
+	
+	 	$("#battle-nav-playerBird")[0].addEventListener("webkitAnimationEnd", battleNav_clearedStage, false);
+	 	$("#battle-nav-playerBird")[0].addEventListener("animationend", battleNav_clearedStage, false);		
+	}
+	
+	function battleNav_clearedStage(event)
+	{
+		var winLoseDisplay;
+		
+		// ADD BACK IN WITH LOGIC
+	 	// $("#info-cloud p").text(Logic.dat_ROM["_LOGIC"]["messages"]["txt_" + battleEndStatus]);
+	 	// ADD BACK IN WITH LOGIC
+	 	
+	 	$("#battle-nav-playerBird")[0].removeEventListener("webkitAnimationEnd", battleNav_clearedStage, false);
+	 	$("#battle-nav-playerBird")[0].removeEventListener("animationend", battleNav_clearedStage, false);		
+	 	
+		$("#battle-nav-player1 .battleCute-warrior-head .battleCute-eyes-sprite").removeClass("battleCute-eyes-look-C").addClass("battleCute-eyes-look-R");
+		$("#battle-nav-player2 .battleCute-warrior-head .battleCute-eyes-sprite").removeClass("battleCute-eyes-look-C").addClass("battleCute-eyes-look-L");	 	
+	 	
+	 	
+	 	$("#battle-nav-player1 .battleCute-speak-left").css("opacity", "1");
+	 	$("#battle-nav-player2 .battleCute-speak-right").css("opacity", "1");
+	 	
+	 	winLoseDisplay = new AnimationTimer();
+	 	timerList_add(winLoseDisplay);
+	 	winLoseDisplay.time(2, battleNav_battleResults);		
+	}
+	
+	function battleNav_battleResults()
+	{
+		var resultsEndDelay;
+		
+		$("#info-cloud").css("opacity", "1");
+		
+		$("#battle-nav-player1 .battleCute-warrior-head .battleCute-eyes-sprite").removeClass("battleCute-eyes-look-R").addClass("battleCute-eyes-look-C");
+		$("#battle-nav-player2 .battleCute-warrior-head .battleCute-eyes-sprite").removeClass("battleCute-eyes-look-L").addClass("battleCute-eyes-look-C");
+		
+		switch(BATTLE_NAV.game.result)
+		{
+			case "LOSE":
+			{
+				$("#battle-nav-player1 .battleCute-cloud").css("opacity", "1").addClass("tween-battleCute-Cloud");	 			
+	 			$("#battle-nav-player1 .battleCute-tears").css("opacity", "1");
+	 			$("#battle-nav-player1 .battleCute-warrior-arm > div").removeClass("battleCute-warrior-armsDown").addClass("battleCute-warrior-armsUp");
+	 			
+	 			$("#battle-nav-player2 .battleCute-warrior-head .battleCute-eyes-sprite").removeClass("battleCute-eyes-norm").addClass("battleCute-eyes-happy");
+				
+				break;
+			}
+			
+			case "WIN":
+			{
+				$("#battle-nav-player2 .battleCute-cloud").css("opacity", "1").addClass("tween-battleCute-Cloud");	 			
+	 			$("#battle-nav-player2 .battleCute-tears").css("opacity", "1");
+	 			$("#battle-nav-player2 .battleCute-warrior-arm > div").removeClass("battleCute-warrior-armsDown").addClass("battleCute-warrior-armsUp");
+	 			
+	 			$("#battle-nav-player1 .battleCute-warrior-head .battleCute-eyes-sprite").removeClass("battleCute-eyes-norm").addClass("battleCute-eyes-happy");
+	 							
+				break;
+			}
+			
+			case "DRAW":
+			{
+				$("#battle-nav-player1 .battleCute-warrior-arm > div").removeClass("battleCute-warrior-armsDown").addClass("battleCute-warrior-armsUp");
+				$("#battle-nav-player2 .battleCute-warrior-arm > div").removeClass("battleCute-warrior-armsDown").addClass("battleCute-warrior-armsUp");				
+				
+				break;
+			}
+			
+		}
+		
+		// ADD BACK IN
+		// resultsEndDelay = new AnimationTimer();
+		// timerList_add(resultsEndDelay);
+		// resultsEndDelay.time(2, battleResultsEndInit);		
+		// ADD BACK IN
+	}
+	
+	
+	
+	
+	
 	
 	function spaceSquids_setup()
 	{
-		trace("catch0");
+		// var spaceSquidsReplayDelay;
 		
 		if(DISPLAY._width < 480)
 		{
@@ -174,8 +551,8 @@
 			
 			spaceSquids_animationInit();
 			
-			spaceSquidsReplayDelay = new AnimationTimer();
-			timerList_add(spaceSquidsReplayDelay);			
+			// spaceSquidsReplayDelay = new AnimationTimer();
+			// timerList_add(spaceSquidsReplayDelay);			
 		}
 	}
 	
@@ -221,12 +598,7 @@
 		$("#spaceSquid0 .spaceSquid_legs1").addClass("tween-SpaceSquid_legsStop");
 		
 		$("#spaceSquid1 .spaceSquid_legs0").addClass("tween-SpaceSquid_legsStop");
-		$("#spaceSquid1 .spaceSquid_legs1").addClass("tween-SpaceSquid_legsStop");
-		
-		
-		// battleNav_init();
-		
-		spaceSquidsReplayDelay.time(4, spaceSquids_animationReturn);	
+		$("#spaceSquid1 .spaceSquid_legs1").addClass("tween-SpaceSquid_legsStop");	
 	}
 	
 	function spaceSquids_animationReturn()
@@ -258,11 +630,7 @@
 		$(".tween-spaceSquidMain")[0].removeEventListener("transitionend", spaceSquids_animationEnd, false);
 		
 		$("#spaceSquid0").removeClass("tween-spaceSquidMain");
-		$("#spaceSquid1").removeClass("tween-spaceSquidMain");		
-		
-		// spaceSquids_animationInit();
-		
-		// spaceSquidsReplayDelay.time(1, spaceSquids_animationStart);	
+		$("#spaceSquid1").removeClass("tween-spaceSquidMain");
 	}
 	
 	
