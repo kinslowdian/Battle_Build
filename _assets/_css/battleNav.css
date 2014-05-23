@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------- NAV */
 /* ------------------------------------------------------------------- NAV */
 
-#info-cloud
+	#info-cloud
 	{
 		width: 320px;
 		height: 20px;
@@ -12,8 +12,16 @@
 		
 		margin: 10px auto 0 auto;
 		
+/*
 		-webkit-transition	: opacity 0.2s ease;
 		transition 			: opacity 0.2s ease;
+*/
+	}
+	
+	.tween-info-cloud
+	{
+		-webkit-transition	: opacity 0.2s ease;
+		transition 			: opacity 0.2s ease;		
 	}
 	
 	#info-cloud p
