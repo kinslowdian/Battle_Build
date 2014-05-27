@@ -9,8 +9,11 @@
 	
 	var microBattleData_HTML_navWrapper = "";
 	var microBattleData_HTML_fadeWrapper = "";
+	var microBattleData_HTML_wipeWrapper = "";
 	
 	var BATTLE_NAV;
+	
+	var firstBattle = true;
 	
 	function init()
 	{
@@ -33,9 +36,12 @@
 	{
 		microBattleData_HTML_navWrapper = $("#microBattle_nav_wrapper").html();
 		microBattleData_HTML_fadeWrapper = $("#microBattle_fade_wrapper").html();
+		microBattleData_HTML_wipeWrapper = $("#microBattle_resultWipe_wrapper").html();
 		
 		$("#microBattle_nav_wrapper").html("");
 		$("#microBattle_fade_wrapper").html("");
+		$("#microBattle_resultWipe_wrapper").html("");
+		
 	}
 	
 	function microBattleSequence_addData()
@@ -96,6 +102,10 @@
 	function microBattleSequence_sceneReady()
 	{
 		var mbs_level_delay;
+		
+		// DISPLAY FIX
+		screenUpdateInit(true);
+		// DISPLAY FIX
 		
 		spaceSquids_setup();
 		
@@ -179,7 +189,7 @@
 		
 		BATTLE_NAV.game = {};
 		
-		BATTLE_NAV.game.result = "DRAW";
+		BATTLE_NAV.game.result = "WIN";
 		
 		BATTLE_NAV.html = {};
 		
@@ -215,10 +225,96 @@
 		$(".tween-battle-cloud")[0].removeEventListener("webkitTransitionEnd", battleNav_inView, false);
 		$(".tween-battle-cloud")[0].removeEventListener("transitionend", battleNav_inView, false);
 		
+		if(firstBattle)
+		{
+			battleNav_hintDisplayInit();
+		}
+		
+		else
+		{
+			battleNav_normalInit();				
+		}
+	}
+	
+	function battleNav_hintDisplayInit()
+	{
+		for(var i = 0; i < 3; i++)
+		{
+			var css;
+			var delay = i * 0.1;
+			
+			css = 	{
+						"-webkit-transition-delay"	: delay + "s",
+						"transition-delay"			: delay + "s",
+						"-webkit-transform" 		: "scale(1)",
+						"transform"					: "scale(1)"
+					};
+					
+			$("#battle-hint-" + i).css(css);
+		}
+		
+		$("#battle-hint-2")[0].addEventListener("webkitTransitionEnd", battleNav_hintDisplayShow, false);
+		$("#battle-hint-2")[0].addEventListener("transitionend", battleNav_hintDisplayShow, false);		
+	}
+	
+	function battleNav_hintDisplayShow(event)
+	{
+		var hintDelay;
+		
+		$("#battle-hint-2")[0].removeEventListener("webkitTransitionEnd", battleNav_hintDisplayShow, false);
+		$("#battle-hint-2")[0].removeEventListener("transitionend", battleNav_hintDisplayShow, false);
+		
+		$("#battle-nav .battleNavShock").css("opacity", "1");
+		
+		hintDelay = new AnimationTimer();
+		
+		timerList_add(hintDelay);
+		hintDelay.time(2.5, battleNav_hintDisplayHide);		
+	}
+	
+	function battleNav_hintDisplayHide()
+	{
+		$("#battle-nav .battleNavShock").css("opacity", "0");
+		
+		for(var i = 0; i < 3; i++)
+		{
+			var css;
+			var sel = Math.abs(i - 2);
+			var delay = i * 0.1;
+			
+			css = 	{
+						"-webkit-transition-delay"	: delay + "s",
+						"transition-delay"			: delay + "s",
+						"-webkit-transform" 		: "scale(0)",
+						"transform"					: "scale(0)"
+					};
+					
+			$("#battle-hint-" + sel).css(css);
+		}
+		
+		$("#battle-hint-0")[0].addEventListener("webkitTransitionEnd", battleNav_hintDisplayRemove, false);
+		$("#battle-hint-0")[0].addEventListener("transitionend", battleNav_hintDisplayRemove, false);	
+	}
+	
+	function battleNav_hintDisplayRemove(event)
+	{
+		$("#battle-hint-0")[0].removeEventListener("webkitTransitionEnd", battleNav_hintDisplayRemove, false);
+		$("#battle-hint-0")[0].removeEventListener("transitionend", battleNav_hintDisplayRemove, false);
+		
+		$("#battle-hint").remove();
+		
+		// TOO EARLY SET TO FALSE?
+		firstBattle = false;
+		
+		battleNav_normalInit();		
+	}
+	
+	function battleNav_normalInit()
+	{
 		$("#player1 .map-goat-head").removeClass("mapPlayer_head_default").addClass("mapPlayer_head_fear");
 		$("#player2 .map-enemy_40x40-head").removeClass("map-enemy_40x40_head_default").addClass("map-enemy_40x40_head_fear");		
-	
-		battleNav_control(true);
+		
+		battleNav_control(true);			
 	}
 	
 	function battleNav_control(run)
@@ -621,6 +717,8 @@
 	
 	function battleNav_battleResultsEnd(event)
 	{
+		var exitFrame;
+		
 		$(".tween-info-cloud")[0].removeEventListener("webkitTransitionEnd", battleNav_battleResultsEnd, false);
 		$(".tween-info-cloud")[0].removeEventListener("transitionend", battleNav_battleResultsEnd, false);
 		
@@ -630,7 +728,11 @@
 			// BATTLE_NAV.game.result === "WIN" ? ROM.battle_RESULT = "WIN" : ROM.battle_RESULT = "LOSE";
 			// ADD BACK IN WHEN LOGIC READY
 			
-			battleNav_battleOver();
+			exitFrame = new AnimationTimer();
+			timerList_add(exitFrame);
+			exitFrame.time(0.02, battleNav_battleOver);
+			
+			// var d = setTimeout(battleNav_battleOver, 20);
 		}
 		
 		else
@@ -675,7 +777,57 @@
 	
 	function battleNav_battleOver()
 	{
+		$("#microBattle_resultWipe_wrapper").html(microBattleData_HTML_wipeWrapper);
 		
+		if(BATTLE_NAV.game.result === "WIN")
+		{
+			$("#microBattle_resultWipe_wrapper .microBattle_resultWipe_fill").addClass("microBattle_resultWipe_win");	
+		}
+		
+		else
+		{
+			$("#microBattle_resultWipe_wrapper .microBattle_resultWipe_fill").addClass("microBattle_resultWipe_lose");
+		}
+	
+		battleNav_hide();
+	}
+	
+	function battleNav_hide()
+	{
+		$(".tween-battle-cloud")[0].addEventListener("webkitTransitionEnd", battleNav_outView, false);
+		$(".tween-battle-cloud")[0].addEventListener("transitionend", battleNav_outView, false);
+				
+		$("#battle-cloud").css(BATTLE_NAV.settings.y_hide);		
+	}
+	
+	function battleNav_outView(event)
+	{
+		trace(event);
+		
+		var css;
+				
+		$(".tween-battle-cloud")[0].removeEventListener("webkitTransitionEnd", battleNav_outView, false);
+		$(".tween-battle-cloud")[0].removeEventListener("transitionend", battleNav_outView, false);		
+		
+		$(".tween-microBattle_resultWipe_content")[0].addEventListener("webkitTransitionEnd", battleNav_memorySave, false);
+		$(".tween-microBattle_resultWipe_content")[0].addEventListener("transitionend", battleNav_memorySave, false);
+		
+		css = 	{
+					"-webkit-transform" : "translateY(0%)",
+					"transform" 		: "translateY(0%)"
+				};
+		
+		$("#microBattle_resultWipe_content").css(css);
+		
+	}
+	
+	function battleNav_memorySave(event)
+	{
+		$(".tween-microBattle_resultWipe_content")[0].removeEventListener("webkitTransitionEnd", battleNav_memorySave, false);
+		$(".tween-microBattle_resultWipe_content")[0].removeEventListener("transitionend", battleNav_memorySave, false);
+		
+		$("#microBattle_nav_wrapper").html("");
+		$("#microBattle_fade_wrapper").html("");		
 	}
 	
 	

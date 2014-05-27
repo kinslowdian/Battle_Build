@@ -12,6 +12,12 @@
 		background-size: 180px 270px;
 	}
 	
+	.vectors_battleHint
+	{
+		background: url(../_img/battleNavHint.svg) no-repeat left top;
+		background-size: 270px 60px;
+	}
+	
 	.pixels_battleFlow
 	{
 		background-image: url(../_img/battleNavSprite_1x.png);
@@ -191,6 +197,14 @@
 		background-size: 160px 240px; 
 	}
 	
+	.pixels_battleCrowd
+	{
+		background-image: url(../_img/battleCrowdTile_1x.png);
+		background-repeat: repeat;
+		background-position: center top;
+		background-size: 80px 80px;
+	}
+	
 	/* 1x */
 	
 	@media all and (-webkit-min-device-pixel-ratio: 1), all and (min-device-pixel-ratio: 1)
@@ -315,6 +329,11 @@
 		.pixels_spaceSquid
 		{
 			background-image: url(../_img/spaceSquid_1x.png);
+		}
+		
+		.pixels_battleCrowd
+		{
+			background-image: url(../_img/battleCrowdTile_1x.png);
 		}	
 	}
 	
@@ -442,5 +461,10 @@
 		.pixels_spaceSquid
 		{
 			background-image: url(../_img/spaceSquid_2x.png);
-		}													
+		}
+		
+		.pixels_battleCrowd
+		{
+			background-image: url(../_img/battleCrowdTile_2x.png);
+		}														
 	}

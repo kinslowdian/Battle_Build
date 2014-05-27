@@ -577,7 +577,7 @@
 					
 		position: absolute;
 					
-		z-index: 2;		
+		z-index: 3;		
 	}
 	
 	.stage-view-y
@@ -1719,6 +1719,106 @@
 				transition: 1s opacity 1s ease-in-out;
 			}
 			
+			
+	#microBattle_resultWipe_wrapper
+	{
+		width: 100%;
+		height: 100%;
+					
+		overflow: hidden;
+					
+		position: absolute;
+					
+		z-index: 2;		
+	}
+		
+	#microBattle_resultWipe_content
+	{
+		width: inherit;
+		height: inherit;
+		
+		position: relative;
+		
+		-webkit-transform: translateY(100%);
+		transform: translateY(100%);
+	}
+	
+	.tween-microBattle_resultWipe_content
+	{
+		-webkit-transition	: -webkit-transform 1s ease;
+		transition 			: transform 1s ease;
+	}
+	
+	.microBattle_resultWipe_fill
+	{
+		width: inherit;
+		height: inherit;
+		
+		position: absolute;
+		
+		left: 0;
+		top:0;
+		
+		z-index: 0;
+	}
+	
+	.microBattle_resultWipe_win
+	{
+		background: #17e69d;
+	}	
+	
+	.microBattle_resultWipe_lose
+	{
+		background: #ff0070;
+	}
+	
+	.microBattle-resultWipe_crowd
+	{
+		width: 100%;
+		height: 100%;
+		
+		position: absolute;
+		
+		-webkit-transform: translateY(306px);
+		transform: translateY(306px);
+		
+		z-index: 1;
+	}
+	
+	.microBattle-resultWipe_crowd > div
+	{
+		width: 100%;
+		height: 100%;
+		
+		position: absolute;
+		
+		left: 0;
+		top: 0;
+		
+		z-index: 0;	
+	}
+	
+	.tween-microBattle-resultWipe_crowd
+	{
+		-webkit-animation	: tweenMicroBattleResultWipeCrowdFrames 0.3s ease-in-out infinite;
+		animation			: tweenMicroBattleResultWipeCrowdFrames 0.3s ease-in-out infinite;
+	}
+	
+	@-webkit-keyframes tweenMicroBattleResultWipeCrowdFrames
+	{
+		0%		{-webkit-transform: translateY(0px);}
+		50%		{-webkit-transform: translateY(20px);}	
+		100%	{-webkit-transform: translateY(0px);}
+	}
+	
+	@keyframes tweenMicroBattleResultWipeCrowdFrames
+	{
+		0%		{-webkit-transform: translateY(0px);}
+		50%		{-webkit-transform: translateY(20px);}	
+		100%	{-webkit-transform: translateY(0px);}			
+	}
+	
+		
 			
 			
 
