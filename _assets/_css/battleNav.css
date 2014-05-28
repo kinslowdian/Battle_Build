@@ -52,6 +52,20 @@
 		transition			: -webkit-transform 1s ease-in-out;
 	}
 	
+	#battle-cloud-cover
+	{
+		width: inherit;
+		height: inherit;
+		
+		visibility: hidden;
+		
+		opacity: 0;
+		
+		position: absolute;
+		
+		z-index: 4;
+	}
+	
 	.battle-cloud-hide
 	{
 		-webkit-transform	: translateY(-211px);

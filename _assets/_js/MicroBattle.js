@@ -66,8 +66,9 @@
 	{
 		var mbs_delay;
 		
-		$(".boss-armL-Cont").addClass("boss-armL-Cont-UP");
-		$(".boss-armR-Cont").addClass("boss-armL-Cont-UP");
+		$("#bossWatching .boss-head > div").removeClass("boss-face-default").addClass("boss-face-happy");
+		$("#bossWatching .boss-armL-Cont").addClass("boss-armL-Cont-UP");
+		$("#bossWatching .boss-armR-Cont").addClass("boss-armL-Cont-UP");
 		
 		mbs_delay = new AnimationTimer();
 		
@@ -169,6 +170,9 @@
 		BATTLE_NAV.settings.options_hide = "battle-nav-hide";								
 		BATTLE_NAV.settings.options_tween = "tween-battle-nav";
 		
+		BATTLE_NAV.settings.crowdPixels = new Array();
+		
+		BATTLE_NAV.settings.crowdPixels = ["goats", "rabbits"];
 				
 		BATTLE_NAV.options = {};
 		
@@ -189,13 +193,12 @@
 		
 		BATTLE_NAV.game = {};
 		
-		BATTLE_NAV.game.result = "WIN";
+		BATTLE_NAV.game.result = "LOSE";
 		
 		BATTLE_NAV.html = {};
 		
 		BATTLE_NAV.html.navOptions = $("#battle-nav").html();
 		BATTLE_NAV.html.navBattle = "";
-		
 										
 		// battleNav_show();
 		
@@ -777,15 +780,20 @@
 	
 	function battleNav_battleOver()
 	{
+		var crowdRandom = BATTLE_NAV.settings.crowdPixels[Math.floor(Math.random() * BATTLE_NAV.settings.crowdPixels.length)];
+		
 		$("#microBattle_resultWipe_wrapper").html(microBattleData_HTML_wipeWrapper);
 		
 		if(BATTLE_NAV.game.result === "WIN")
 		{
+			$("#microBattle_resultWipe_wrapper .microBattle-resultWipe_crowd > div").addClass("pixels_battleCrowd_" + crowdRandom);
 			$("#microBattle_resultWipe_wrapper .microBattle_resultWipe_fill").addClass("microBattle_resultWipe_win");	
 		}
 		
 		else
 		{
+			$("#microBattle_resultWipe_wrapper .microBattle-resultWipe_crowd").remove();
+			
 			$("#microBattle_resultWipe_wrapper .microBattle_resultWipe_fill").addClass("microBattle_resultWipe_lose");
 		}
 	

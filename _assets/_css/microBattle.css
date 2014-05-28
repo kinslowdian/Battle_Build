@@ -1140,12 +1140,36 @@
 		z-index: 1;
 	}
 			
-	.boss-face0
+	.boss-face-default
 	{
 		width: inherit;
 		height: inherit;
 				
 		background-position: -331px 0;
+	}
+	
+	.boss-face-happy
+	{
+		width: inherit;
+		height: inherit;
+				
+		background-position: -331px -35px;
+	}
+	
+	.boss-face-dead
+	{
+		width: inherit;
+		height: inherit;
+				
+		background-position: -331px -70px;
+	}
+	
+	.boss-face-fear
+	{
+		width: inherit;
+		height: inherit;
+				
+		background-position: -331px -105px;
 	}
 			
 	.boss-body
@@ -1816,6 +1840,23 @@
 		0%		{-webkit-transform: translateY(0px);}
 		50%		{-webkit-transform: translateY(20px);}	
 		100%	{-webkit-transform: translateY(0px);}			
+	}
+	
+	.microBattle-resultWipe_boss
+	{
+		width: 320px;
+		height: 280px;
+		
+		position: absolute;
+		
+		left: 0; right: 0; top: 0; bottom: 0;
+		
+		margin: 0 auto;
+		
+		-webkit-transform: translateY(306px);
+		transform: translateY(306px);
+		
+		z-index: 1;
 	}
 	
 		
