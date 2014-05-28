@@ -193,7 +193,7 @@
 		
 		BATTLE_NAV.game = {};
 		
-		BATTLE_NAV.game.result = "LOSE";
+		BATTLE_NAV.game.result = "WIN";
 		
 		BATTLE_NAV.html = {};
 		
@@ -786,14 +786,19 @@
 		
 		if(BATTLE_NAV.game.result === "WIN")
 		{
+			$("#battle-cloud-cover").addClass("battle-cloud-pixels-win");
+			
+			$("#microBattle_resultWipe_wrapper .microBattle-resultWipe_boss").remove();
+			
 			$("#microBattle_resultWipe_wrapper .microBattle-resultWipe_crowd > div").addClass("pixels_battleCrowd_" + crowdRandom);
 			$("#microBattle_resultWipe_wrapper .microBattle_resultWipe_fill").addClass("microBattle_resultWipe_win");	
 		}
 		
 		else
 		{
-			$("#microBattle_resultWipe_wrapper .microBattle-resultWipe_crowd").remove();
+			$("#battle-cloud-cover").addClass("battle-cloud-pixels-lose");
 			
+			$("#microBattle_resultWipe_wrapper .microBattle-resultWipe_crowd").remove();
 			$("#microBattle_resultWipe_wrapper .microBattle_resultWipe_fill").addClass("microBattle_resultWipe_lose");
 		}
 	
@@ -807,6 +812,21 @@
 				
 		$("#battle-cloud").css(BATTLE_NAV.settings.y_hide);		
 	}
+	
+/*
+	function battleNav_hide()
+	{
+		var css;
+		
+		css = 	{
+					"visibility"	: "visible",
+					"opacity"		: "1"
+				}
+		
+		$("#battle-cloud-cover").css(css);	
+	}
+*/
+	
 	
 	function battleNav_outView(event)
 	{
@@ -828,14 +848,38 @@
 		$("#microBattle_resultWipe_content").css(css);
 		
 	}
+
+/*
+	function battleNav_outView()
+	{
+		var css;	
+		
+		$(".tween-microBattle_resultWipe_content")[0].addEventListener("webkitTransitionEnd", battleNav_memorySave, false);
+		$(".tween-microBattle_resultWipe_content")[0].addEventListener("transitionend", battleNav_memorySave, false);
+		
+		css = 	{
+					"-webkit-transform" : "translateY(0%)",
+					"transform" 		: "translateY(0%)"
+				};
+		
+		$("#microBattle_resultWipe_content").css(css);
+		
+	}
+*/
 	
 	function battleNav_memorySave(event)
 	{
 		$(".tween-microBattle_resultWipe_content")[0].removeEventListener("webkitTransitionEnd", battleNav_memorySave, false);
 		$(".tween-microBattle_resultWipe_content")[0].removeEventListener("transitionend", battleNav_memorySave, false);
 		
-		$("#microBattle_nav_wrapper").html("");
-		$("#microBattle_fade_wrapper").html("");		
+		// $("#microBattle_nav_wrapper").html("");
+		$("#microBattle_fade_wrapper").html("");
+		
+		// battleNav_hide();
+		
+		$("#battle-cloud #battle-cloud-cover").css("visibility", "visible");
+		
+		$("#battle-cloud").css(BATTLE_NAV.settings.y_show);		
 	}
 	
 	
