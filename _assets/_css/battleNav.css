@@ -52,27 +52,14 @@
 		transition			: -webkit-transform 1s ease-in-out;
 	}
 	
-	.battle-cloud-pixels-bg
-	{
-		background-position: 0 0;
-	}
-	
-	.battle-cloud-pixels-win
-	{
-		background-position: 0 -211px;
-	}
-	
-	.battle-cloud-pixels-lose
-	{
-		background-position: 0 -422px;
-	}
-	
 	#battle-cloud-cover
 	{
 		width: inherit;
 		height: inherit;
 		
 		visibility: hidden;
+		
+		opacity: 0;
 		
 		position: absolute;
 		

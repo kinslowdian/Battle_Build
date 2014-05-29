@@ -1786,6 +1786,90 @@
 		z-index: 0;
 	}
 	
+	.microBattle_endSky
+	{
+		width: inherit;
+		height: 210px;
+		
+		overflow: hidden;
+		
+		position: absolute;
+		
+		left: 0;
+		top: 0;
+		
+		z-index: 0;
+		
+		background: #e5ffb2;
+	}
+	
+	.microBattle_endSky_mountains
+	{
+		width: inherit;
+		height: 110px;
+		
+		position: absolute;
+		
+		left: 0;
+		bottom: 0;
+		
+		z-index: 1;
+	}
+	
+	.microBattle_endSky_mountains_win
+	{
+		background-repeat: repeat-x;
+		background-position: center -140px;
+	}
+	
+	.microBattle_endSky_mountains_lose
+	{
+		background-repeat: repeat-x;
+		background-position: center -250px;
+	}
+	
+	.microBattle_endSky_sunMoon
+	{
+		width: 140px;
+		
+		position: absolute;
+		
+		left:0; right: 0; top: 0; bottom: 0; 
+		
+		margin: 0 auto;
+		
+		-webkit-transform: translateX(-100px);
+		transform: translateX(-100px);
+		
+		z-index: 0;
+	}
+	
+	.microBattle_endSky_sunMoon_sprite
+	{
+		width: 140px;
+		height: 140px;
+		
+		position: absolute;
+		left: 0; top: 0;
+		
+		-webkit-transform: translateY(210px);
+		transform: translateY(210px);
+		
+		z-index: 0;
+	}
+	
+	.microBattle_endSky_sunMoon_sprite_win
+	{
+		background-repeat: no-repeat;
+		background-position: 0 0;
+	}
+	
+	.microBattle_endSky_sunMoon_sprite_lose
+	{
+		background-repeat: no-repeat;
+		background-position: -140px 0;
+	}
+	
 	.microBattle_resultWipe_win
 	{
 		background: #17e69d;
@@ -1820,6 +1904,13 @@
 		top: 0;
 		
 		z-index: 0;	
+	}
+	
+	.tween-microBattle_endSky
+	{
+		-webkit-transition: -webkit-transform 1s ease;
+		transition: transform 1s ease;
+		
 	}
 	
 	.tween-microBattle-resultWipe_crowd

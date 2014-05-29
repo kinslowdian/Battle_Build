@@ -3,7 +3,7 @@
 		background-image: url(../_img/battleNavCloud_1x.png);
 		background-repeat: repeat-x;
 		background-position: center top;				
-		background-size: 72px 633px;
+		background-size: 72px 211px;
 	}
 	
 	.vectors_battleNav
@@ -197,6 +197,13 @@
 		background-size: 160px 240px; 
 	}
 	
+	.pixels_battleCrowd_sky
+	{
+		background-image: url(../_img/battleSky_1x.png);
+		/* background-repeat: no-repeat; */
+		background-size: 534px 360px;
+	}
+	
 	.pixels_battleCrowd_goats
 	{
 		background-image: url(../_img/battleCrowdTile_goats_1x.png);
@@ -339,6 +346,11 @@
 			background-image: url(../_img/spaceSquid_1x.png);
 		}
 		
+		.pixels_battleCrowd_sky
+		{
+			background-image: url(../_img/battleSky_1x.png);
+		}
+		
 		.pixels_battleCrowd_goats
 		{
 			background-image: url(../_img/battleCrowdTile_goats_1x.png);
@@ -474,6 +486,11 @@
 		.pixels_spaceSquid
 		{
 			background-image: url(../_img/spaceSquid_2x.png);
+		}
+		
+		.pixels_battleCrowd_sky
+		{
+			background-image: url(../_img/battleSky_2x.png);
 		}
 		
 		.pixels_battleCrowd_goats
